@@ -1,0 +1,19 @@
+
+{% load bootstrap3 %}
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="mx-auto">
+  <div class="padding-top 10">
+
+  </div>
+   <h1> Add Task </h1>
+</div>
+
+    <form class='form-task-ajax' method="POST" action='{% url "projects:addtask" %}'> {% csrf_token %}
+      {% bootstrap_form form %}
+        <input type="submit" value="Add" class="btn btn-default">
+    </form>
+    </div>
+      </div>

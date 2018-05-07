@@ -1,0 +1,4 @@
+pip freeze > requirements.txt
+apm list --installed --bare > package-list.txt
+apm install --packages-file package-list.txt
+https://help.github.com/articles/adding-a-file-to-a-repository-using-the-command-line/

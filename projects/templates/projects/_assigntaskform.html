@@ -1,0 +1,10 @@
+
+{% load bootstrap3 %}
+
+<div class="container">
+    <h1>Update Task </h1>
+    <form class='form-task-ajax' method="POST" action='{% url "projects:assigntask" pk=task.id %}'> {% csrf_token %}
+      {% bootstrap_form form %}
+        <input type="submit" value="Update" class="btn btn-default">
+    </form>
+</div>

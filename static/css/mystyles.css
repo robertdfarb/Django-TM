@@ -1,0 +1,23 @@
+body {
+    background: url('../img/canvas.png');
+    background-size: cover;
+}
+
+.container-cust {
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.welcome {
+  padding: 40px;
+  padding-top: 60px;
+  text-align: center;
+
+}
+
+.button-row {
+  padding: 40px;
+
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="welcome">
+
+    <h1> Welcome {{ user.first_name }} {{ user.last_name }}  </h1>
+
+</div>
+
+<div class="main_tasks" id="task-table" ></div>
+{% include "projects/_tasktabulator.html" %}
+
+    <!--  {% include "projects/_stopwatch.html" %} -->
+
+<div class="button-row">
+    <button type="button" id='add-task-button' onclick="addtask()" class="btn btn-primary"> Add Task </button>
+</div>
+
+<div class='main-panel' id='panel'> </div>
+
+{% endblock %}

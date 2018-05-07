@@ -1,0 +1,45 @@
+<h1> Time Logged for Task </h1>
+
+<div class="table" id="timelog-panel" ></div>
+
+<script>
+
+var editIcon = function(cell, formatterParams){ //plain text value
+    return "<i class='far fa-edit'></i>";
+};
+
+
+//column definition in the columns array
+  $("#timelog-panel").tabulator({
+    layout:"fitColumns",
+    tooltips:true,
+    movableRows: false,
+    tooltipsHeader:true,
+    addRowPos:"top",
+    history:true,
+    //pagination:"local",
+    //paginationSize:10,
+    movableColumns:false,
+    resizableRows:false,
+    initialSort:[
+      {column:"name", dir:"asc"},
+    ],
+      columns:[
+          {title:"Date Logged", field:"date_time_started", sorter:"string", width:200},
+          {title:"Actual Hours", field:"actualhrs", sorter:"text", align:"right", bottomCalc:"sum"},
+          {title:"Billable Hours", field:"billablehrs", sorter:"string", align:"right", bottomCalc:"sum"},
+          {title:"Comments", field:"comments", sorter:"string", align:"left", bottomCalc:"sum"},
+          {formatter:editIcon, width:40, align:"center", cellClick:edittask},
+
+      ],
+
+  });
+
+
+
+  $("#timelog-panel").tabulator("setData", '/projects/ajax_tasks/16');
+
+
+</script>
+
+</div>

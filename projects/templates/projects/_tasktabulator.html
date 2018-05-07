@@ -1,0 +1,126 @@
+<script>
+
+var editIcon = function(cell, formatterParams){ //plain text value
+    return "<i class='far fa-edit'></i>";
+};
+
+var timeIcon = function(cell, formatterParams){ //plain text value
+    return "<i class='far fa-clock'></i>";
+};
+
+var assignIcon = function(cell, formatterParams){ //plain text value
+    return "<i class='fas fa-user-edit'></i>";
+};
+
+
+var addtask = function(e, cell){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("panel").innerHTML = this.response;
+   }
+ };
+ xhttp.open("GET", "/projects/add/", true);
+ xhttp.send();
+}
+
+var edittask = function(e, cell){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("panel").innerHTML = this.response;
+   }
+ };
+ xhttp.open("GET", "/projects/edit/"+cell.getRow().getData().id, true);
+ xhttp.send();
+}
+
+var timetask = function(e, cell){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("panel").innerHTML = this.response;
+   }
+ };
+ xhttp.open("GET", "/projects/time/"+cell.getRow().getData().id, true);
+ xhttp.send();
+}
+
+var assigntask = function(e, cell){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("panel").innerHTML = this.response;
+   }
+ };
+ xhttp.open("GET", "/projects/assign/"+cell.getRow().getData().id, true);
+ xhttp.send();
+}
+
+
+//column definition in the columns array
+  $("#task-table").tabulator({
+    layout:"fitColumns",
+    tooltips:true,
+    movableRows: true,
+    tooltipsHeader:true,
+    addRowPos:"top",
+    history:true,
+    pagination:"local",
+    paginationSize:10,
+    movableColumns:true,
+    resizableRows:true,
+    initialSort:[
+      {column:"name", dir:"asc"},
+    ],
+      columns:[
+          {title:"Task Subject", field:"subject", sorter:"string", width:200},
+          {title:"Client", field:"project__client__name", align:"left", width:100, headerFilter:"input", headerFilterPlaceholder:"filter client"},
+          {title:"Type", field:"type__type", sorter:"text", align:"left", headerFilter:"input", headerFilterPlaceholder:"filter type"},
+          {title:"Task Description", field:"description", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"filter description"},
+          {title:"Budgeted Hours", field:"budgeted_hrs", sorter:"string", align:"right", bottomCalc:"sum"},
+          {title:"Due Date", field:"due_date", sorter:"date", align:"center",headerFilter:"input"},
+          {title:"Last Client Contact", field:"project__last_contact_date", sorter:"date", align:"center",headerFilter:"input"},
+          {formatter:editIcon, width:40, align:"center", cellClick:edittask},
+          {formatter:timeIcon, width:40, align:"center", cellClick:timetask},
+          {formatter:assignIcon, width:40, align:"center", cellClick:assigntask},
+      ],
+
+      //Research how to change the priority and post a request back to the server
+      rowMoved:function(row){
+        var rows = $("#task-table").tabulator("getRows", true)
+        var position = $("#task-table").tabulator("getRowPosition", row)
+        if (row.getData().priority !=0) {
+          console.log("That worked")
+          alert("Task ID: " + row.getData().id + " has been moved to position" + position);
+        };
+      },
+
+      rowFormatter:function(row){
+        var today = new Date();
+        today.setHours(0,0,0,0);
+        dueDateCell = row.getCell('due_date');
+        console.log(dueDateCell);
+        contactDateCell = row.getCell('project__last_contact_date');
+        var data = row.getData(); //get data object for row
+        contactdate = Date.parse(data.project__last_contact_date) || 0;
+        duedate = Date.parse(data.due_date) || 0;
+        console.log(duedate)
+
+        if(contactdate <= today){
+            //contactDateCell.getElement().css({"background-color":"red"}); //apply css change to row element
+            console.log("Contact Date in the Past")
+        };
+        if(duedate <= today){
+          dueDateCell.getElement().css({"background-color":"#FF6347"}); //apply css change to row element
+          console.log("Due Date in the Past")
+        };
+    },
+  });
+
+
+  $("#task-table").tabulator("setData", '/projects/ajax_tasks/');
+
+
+
+</script>

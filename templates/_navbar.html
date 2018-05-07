@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container-cust">
+        <div class='text-right'>
+
+
+        <a class="navbar-brand mynav"> </a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapseLinks' aria-expanded='false' aria-label='Toggle Navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
+
+    <div class='collapse navbar-collapse' id='navbarCollapseLinks'>
+        <ul class='navbar-nav'>
+            {% if user.is_authenticated %}
+                  <li class='nav-item'>
+                    <a href="{% url 'projects:all' %}"  class="btn btn-simple">Task Manager</a></li>
+                  <li class='nav-item'>
+                    <a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Other Options
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+            {% else %}
+                  <li class='nav-item'>
+                    <a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>
+                  <li class='nav-item'>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-simple">Register</a></li>
+            {% endif %}
+
+
+          </ul>
+      </div>
+      </div>
+              </div>
+    </nav>

@@ -1,0 +1,45 @@
+Database Structure:
+
+Multi level task management
+
+Client - One Owner, Multiple users
+Project - One Owner, Multiple users
+Task - One Owner, Multiple User
+A task can have one owner and multiple users
+
+
+
+Main Page:  Title is Hourly Billing Manager
+
+Task Model: Get activate records for user
+Task Model: Get sum of estimated hours due today, three days, week
+Show hours billed, day, week, month.  Hours remaining day week month
+
+Task Model:  tasks ordered by due date in scroll bar
+Task Model: Notifications of tasks overdue,
+User Model: Extend model
+            a. user signup form to include first name, last name, organization, email, profile photo
+            b. Login by email
+                        c. username to slug
+            d. User Extension:  Monthly billing required / Goals (Changing)
+
+
+Other Features:
+  1. Task Reassignment
+
+Create / Edit views for incorporated for all records.  Form for adding
+Special views for special users
+Dynamic search and filtering features like workday
+Allow adding and editing tasks directly from the table.
+Show all Tasks including those not completed
+
+
+Log Models:  Stop watch that tracks time.
+  a.  Time Logged in
+  b.  Time Logged out / browser closed
+  c.  Reminder if inactive
+  d.  Ability to pause task and move to another task
+
+
+Reporting:
+  a. comparison of estimated to actual hours by week,
