@@ -30,5 +30,5 @@ SQLAlchemy==1.2.7
 sqlparse==0.2.4
 tabulator==1.14.0
 unicodecsv==0.14.1
-urllib3==1.22
+urllib3==1.26.5
 xlrd==1.1.0
